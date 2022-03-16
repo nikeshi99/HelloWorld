@@ -1,0 +1,20 @@
+trigger: none
+pr: none
+jobs:
+- job: DockerBuild
+
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+
+  - task: Docker@2
+    displayName: 'Build Init Docker Image'
+    inputs:
+      command: build
+      Dockerfile: 'Hello-world-service/Dockerfile'
+      buildContext: '.'
+      tags: |
+        latest
+
+  - script: |
+      curl http://localhost:8080/greeting
