@@ -6,11 +6,14 @@ jobs:
 
   pool:
     vmImage: 'ubuntu-latest'
+  variables:
+    imageName: 'pipelines-hello-docker'
   steps:
 
   - task: Docker@2
     displayName: 'Build Init Docker Image'
     inputs:
+      repository: $(imageName)
       command: build
       Dockerfile: 'Hello-world-service/Dockerfile'
       buildContext: '.'
