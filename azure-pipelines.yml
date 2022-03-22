@@ -9,16 +9,8 @@ jobs:
   variables:
     imageName: 'pipelines-hello-docker'
   steps:
-  - task: Docker@2
-    displayName: Login to ACR
-    inputs:
-      command: login
-      containerRegistry: dockerRegistryServiceConnection1
-  - task: Docker@2
-    displayName: Login to Docker Hub
-    inputs:
-      command: login
-      containerRegistry: dockerRegistryServiceConnection2
+  - script: |
+      docker login -u ${{secret.dockerU}} -p ${{secret.dockerP}}
   - task: Docker@2
     displayName: 'Build and push Docker Image'
     inputs:
@@ -30,4 +22,5 @@ jobs:
         latest
 
   - script: |
+      docker run -d -p  8080:9090 $(imageName)
       curl http://localhost:8080/greeting
