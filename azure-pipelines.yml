@@ -17,7 +17,7 @@ jobs:
       command: build
       Dockerfile: 'Hello-world-service/Dockerfile' 
       imageName: '$(imageName)'
-      buildContext: '.'
+      buildContext: 'Hello-world-service/'
       tags: |
         latest
   - task: Docker@2
