@@ -7,7 +7,7 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
   variables:
-    imageName: 'pipelines-hello-docker'
+    imageName: 'helloworld'
   steps:
   - task: Docker@2
     displayName: 'Build and push Docker Image'
