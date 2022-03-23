@@ -9,18 +9,24 @@ jobs:
   variables:
     imageName: 'pipelines-hello-docker'
   steps:
-  - script: |
-      docker login -u nikeshi -p Nikeshi@321
   - task: Docker@2
     displayName: 'Build and push Docker Image'
     inputs:
-      repository: $(imageName)
-      command: buildAndPush
+      containerregistrytype: 'Container Registry'
+      dockerRegistryEndpoint: 'Docker Hub'
+      command: build
       Dockerfile: 'Hello-world-service/Dockerfile'
+      imageName: '$(imageName)'
       buildContext: '.'
       tags: |
         latest
-
+  - task: Docker@2
+      displayName: 'Push the Docker image to Dockerhub'
+      inputs:
+        containerregistrytype: 'Container Registry'
+        dockerRegistryEndpoint: 'Docker Hub'
+        command: push
+        imageName: '$(imageName)'
   - script: |
       docker run -d -p  8080:9090 $(imageName)
       curl http://localhost:8080/greeting
