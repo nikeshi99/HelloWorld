@@ -27,6 +27,4 @@ jobs:
       dockerRegistryEndpoint: 'Docker Hub'
       command: push
       imageName: '$(imageName)'
-  - script: |
-      docker run -d -p  8080:9090 $(imageName):latest .
-      curl http://localhost:8080/greeting
+  
