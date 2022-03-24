@@ -27,4 +27,7 @@ jobs:
       dockerRegistryEndpoint: 'Docker Hub'
       command: push
       imageName: '$(imageName)'
-  
+  - script: |
+      docker run -d -p 8080:8080 '$(imageName)' &
+      sleep 10
+      curl http://localhost:8080/greeting
