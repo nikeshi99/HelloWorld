@@ -30,7 +30,7 @@ jobs:
       dockerRegistryEndpoint: 'Docker Hub'
       repository: $(REPOSITORY)
       command: push
-      imageName: $(imageName):latest
+      imageName: $(imageName):37
   - script: |
       docker run -d -p 8080:8080 HelloWorld-docker.azurecr.io/$(REPOSITORY):latest &
       sleep 10
