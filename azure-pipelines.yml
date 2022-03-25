@@ -21,7 +21,7 @@ jobs:
       imageName: $(imageName)
       buildContext: 'Hello-world-service/'
       tags: |
-        latest
+        $(Build.Buildid)
 
   - task: Docker@2
     displayName: 'Push the Docker image to Dockerhub'
