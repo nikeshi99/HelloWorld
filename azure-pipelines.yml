@@ -8,7 +8,7 @@ jobs:
     vmImage: 'ubuntu-latest'
   variables:
     REPOSITORY: 'nikeshi/testing1'
-    
+    imageName: 'nikeshi/$(REPOSITORY):$(Build.Buildid)' 
   steps:
   - task: Docker@2
     displayName: 'Build and Docker Image'
@@ -18,8 +18,6 @@ jobs:
       command: build
       repository: $(REPOSITORY)
       Dockerfile: 'Hello-world-service/Dockerfile' 
-      variables:
-        imageName: 'nikeshi/$(REPOSITORY):$(Build.Buildid)'
       imageName: $(imageName)
       buildContext: 'Hello-world-service/'
       tags: |
