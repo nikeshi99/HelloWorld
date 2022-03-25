@@ -2,7 +2,7 @@ trigger:
 - main
 pr: none
 jobs:
-- job: DockerBuild&Push
+- job: DockerBuild
 
   pool:
     vmImage: 'ubuntu-latest'
