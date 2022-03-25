@@ -7,7 +7,6 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
   variables:
-    imageName: 'helloworld'
     REPOSITORY: 'nikeshi/testing1'
     
   steps:
@@ -19,9 +18,12 @@ jobs:
       command: build
       repository: $(REPOSITORY)
       Dockerfile: 'Hello-world-service/Dockerfile' 
-      imageName: nikeshi/$(REPOSITORY)
+      variables:
+        imageName: 'nikeshi/$(REPOSITORY):$(Build.Buildid)'
+      imageName: $(imageName)
       buildContext: 'Hello-world-service/'
-    
+      tags: |
+        latest
 
   - task: Docker@2
     displayName: 'Push the Docker image to Dockerhub'
@@ -30,7 +32,7 @@ jobs:
       dockerRegistryEndpoint: 'Docker Hub'
       repository: $(REPOSITORY)
       command: push
-      imageName: nikeshi/$(REPOSITORY)
+      imageName: $(imageName)
   - script: |
       docker run -d -p  8080:9090 $(REPOSITORY):latest &
       sleep 15
