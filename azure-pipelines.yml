@@ -28,6 +28,7 @@ jobs:
     inputs:
       containerregistrytype: 'Container Registry'
       dockerRegistryEndpoint: 'Docker Hub'
+      repository: '$(REPOSITORY)'
       command: push
       imageName: '$(imageName)'
   - script: |
