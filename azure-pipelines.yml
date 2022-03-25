@@ -19,7 +19,7 @@ jobs:
       command: build
       repository: $(REPOSITORY)
       Dockerfile: 'Hello-world-service/Dockerfile' 
-      imageName: nikeshi/$(REPOSITORY):$(Build.Buildid)
+      imageName: nikeshi/$(REPOSITORY)
       buildContext: 'Hello-world-service/'
     
 
@@ -30,7 +30,7 @@ jobs:
       dockerRegistryEndpoint: 'Docker Hub'
       repository: $(REPOSITORY)
       command: push
-      imageName: nikeshi/$(REPOSITORY):$(Build.Buildid)
+      imageName: nikeshi/$(REPOSITORY)
   - script: |
       docker run -d -p  8080:9090 $(REPOSITORY):latest &
       sleep 15
