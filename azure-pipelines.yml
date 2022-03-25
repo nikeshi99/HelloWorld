@@ -2,7 +2,7 @@ trigger:
 - main
 pr: none
 jobs:
-- job: DockerBuild
+- job: DockerBuild&Push
 
   pool:
     vmImage: 'ubuntu-latest'
@@ -12,17 +12,27 @@ jobs:
     
   steps:
   - task: Docker@2
-    displayName: 'Build and Push Docker Image'
+    displayName: 'Build and Docker Image'
     inputs:
-      #dockerRegistryEndpoint: 'Docker Hub'
-      command: buildAndPush
+      containerregistrytype: 'Container Registry'
+      dockerRegistryEndpoint: 'Docker Hub'
+      command: build
       repository: $(REPOSITORY)
       Dockerfile: 'Hello-world-service/Dockerfile' 
-      imageName: '$(imageName)'
+      imageName: nikeshi/$(REPOSITORY):$(Build.Buildid)
       buildContext: 'Hello-world-service/'
       tags: |
         latest
+
+  - task: Docker@2
+    displayName: 'Push the Docker image to Dockerhub'
+    inputs:
+      containerregistrytype: 'Container Registry'
+      dockerRegistryEndpoint: 'Docker Hub'
+      repository: $(REPOSITORY)
+      command: push
+      imageName: nikeshi/$(REPOSITORY):$(Build.Buildid)
   - script: |
-      docker run -d -p 8080:8080 HelloWorld-docker.azurecr.io/$(REPOSITORY):latest &
-      sleep 10
+      docker run -d -p  8080:9090 $(REPOSITORY):latest &
+      sleep 15
       curl http://localhost:8080/greeting
