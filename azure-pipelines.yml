@@ -12,25 +12,17 @@ jobs:
     
   steps:
   - task: Docker@2
-    displayName: 'Build Docker Image'
+    displayName: 'Build and Push Docker Image'
     inputs:
       containerregistrytype: 'Container Registry'
       dockerRegistryEndpoint: 'Docker Hub'
-      repository: '$(REPOSITORY)'
-      command: build
+      command: buildAndPush
+      repository: $(REPOSITORY)
       Dockerfile: 'Hello-world-service/Dockerfile' 
       imageName: '$(imageName)'
       buildContext: 'Hello-world-service/'
       tags: |
         latest
-  - task: Docker@2
-    displayName: 'Push the Docker image to Dockerhub'
-    inputs:
-      containerregistrytype: 'Container Registry'
-      dockerRegistryEndpoint: 'Docker Hub'
-      repository: $(REPOSITORY)
-      command: push
-      imageName: $(imageName):37
   - script: |
       docker run -d -p 8080:8080 HelloWorld-docker.azurecr.io/$(REPOSITORY):latest &
       sleep 10
