@@ -28,9 +28,9 @@ jobs:
     inputs:
       containerregistrytype: 'Container Registry'
       dockerRegistryEndpoint: 'Docker Hub'
-      repository: '$(REPOSITORY)'
+      repository: $(REPOSITORY)
       command: push
-      imageName: '$(imageName)'
+      imageName: $(imageName):latest
   - script: |
       docker run -d -p 8080:8080 HelloWorld-docker.azurecr.io/$(REPOSITORY):latest &
       sleep 10
