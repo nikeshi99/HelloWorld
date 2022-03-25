@@ -8,12 +8,15 @@ jobs:
     vmImage: 'ubuntu-latest'
   variables:
     imageName: 'helloworld'
+    REPOSITORY: 'nikeshi/testing1'
+    
   steps:
   - task: Docker@2
-    displayName: 'Build and push Docker Image'
+    displayName: 'Build Docker Image'
     inputs:
       containerregistrytype: 'Container Registry'
       dockerRegistryEndpoint: 'Docker Hub'
+      repository: '$(REPOSITORY)'
       command: build
       Dockerfile: 'Hello-world-service/Dockerfile' 
       imageName: '$(imageName)'
@@ -28,6 +31,6 @@ jobs:
       command: push
       imageName: '$(imageName)'
   - script: |
-      docker run -d -p 8080:8080 '$(imageName)' &
+      docker run -d -p 8080:8080 HelloWorld-docker.azurecr.io/$(REPOSITORY):latest &
       sleep 10
       curl http://localhost:8080/greeting
