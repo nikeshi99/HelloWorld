@@ -21,8 +21,7 @@ jobs:
       Dockerfile: 'Hello-world-service/Dockerfile' 
       imageName: nikeshi/$(REPOSITORY):$(Build.Buildid)
       buildContext: 'Hello-world-service/'
-      tags: |
-        4
+    
 
   - task: Docker@2
     displayName: 'Push the Docker image to Dockerhub'
