@@ -16,7 +16,7 @@ jobs:
       repository: 'nikeshi/testing1'
       command: 'buildAndPush'
       Dockerfile: 'Hello-world-service/Dockerfile'
-      buildContext: 'Hello-world-service/''
+      buildContext: 'Hello-world-service/'
   - script: |
       docker run -d -p  8080:9090 nikeshi/testing1:$(Build.BuildId)
       sleep 60
