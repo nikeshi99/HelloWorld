@@ -14,7 +14,10 @@ jobs:
       command: 'buildAndPush'
       Dockerfile: 'Hello-world-service/Dockerfile'
       buildContext: 'Hello-world-service/'
+      tag: |
+        v1
+
   - script: |
-      docker run -d -p  8080:9090 nikeshi/testing1:$(Build.BuildId)
+      docker run -d -p  8080:9090 nikeshi/testing1:v1
       sleep 80
       curl http://localhost:8080/greeting
