@@ -18,6 +18,6 @@ jobs:
         v1
 
   - script: |
-      docker run -d -p  8080:8080 nikeshi/testing1:v1
-      sleep 80
+      docker run -d -p 8080:8080 nikeshi/testing1:v1
+      sleep 120
       curl http://localhost:8080/greeting
