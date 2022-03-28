@@ -11,27 +11,13 @@ jobs:
     imageName: 'nikeshi/$(REPOSITORY):$(Build.Buildid)' 
   steps:
   - task: Docker@2
-    displayName: 'Build and Docker Image'
     inputs:
-      containerregistrytype: 'Container Registry'
-      dockerRegistryEndpoint: 'Docker Hub'
-      command: build
-      repository: $(REPOSITORY)
-      Dockerfile: 'Hello-world-service/Dockerfile' 
-      imageName: $(imageName)
-      buildContext: 'Hello-world-service/'
-      tags: |
-        $(Build.Buildid)
-
-  - task: Docker@2
-    displayName: 'Push the Docker image to Dockerhub'
-    inputs:
-      containerregistrytype: 'Container Registry'
-      dockerRegistryEndpoint: 'Docker Hub'
-      repository: $(REPOSITORY)
-      command: push
-      imageName: $(imageName)
+      containerRegistry: 'Docker Hub'
+      repository: 'nikeshi/testing1'
+      command: 'buildAndPush'
+      Dockerfile: 'Hello-world-service/Dockerfile'
+      buildContext: 'Hello-world-service/''
   - script: |
-      docker run -d -p  8080:9090 $(REPOSITORY):latest &
-      sleep 15
+      docker run -d -p  8080:9090 nikeshi/testing1 
+      sleep 60
       curl http://localhost:8080/greeting
