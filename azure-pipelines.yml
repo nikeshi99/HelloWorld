@@ -18,6 +18,6 @@ jobs:
       Dockerfile: 'Hello-world-service/Dockerfile'
       buildContext: 'Hello-world-service/''
   - script: |
-      docker run -d -p  8080:9090 nikeshi/testing1 
+      docker run -d -p  8080:9090 nikeshi/testing1:$(Build.BuildId)
       sleep 60
       curl http://localhost:8080/greeting
