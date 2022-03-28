@@ -6,9 +6,6 @@ jobs:
 
   pool:
     vmImage: 'ubuntu-latest'
-  variables:
-    REPOSITORY: 'nikeshi/testing1'
-    imageName: 'nikeshi/$(REPOSITORY):$(Build.Buildid)' 
   steps:
   - task: Docker@2
     inputs:
