@@ -4,14 +4,14 @@ metadata:
   namespace: my-kubernetes
   name: pod-reader
 rules:
-- apiGroups: rbac.authorization.k8s.io
-  resources: 
-  - pods
-  verbs: 
-  - get
-  - watch
-  - list
-  - create
+# - apiGroups: rbac.authorization.k8s.io
+#   resources: 
+#   - pods
+#   verbs: 
+#   - get
+#   - watch
+#   - list
+#   - create
 - apiGroups: 
   - apps
   resources: 
