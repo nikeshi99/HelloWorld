@@ -4,9 +4,10 @@ metadata:
   namespace: my-kubernetes
   name: pod-reader
 rules:
-- apiGroups: ["apps/v1"] # "" indicates the core API group
+- apiGroups: rbac.authorization.k8s.io
   resources: ["pods"]
   verbs: ["get", "watch", "list","create"]
-- apiGroups: "apps"
+- apiGroups: 
+  - apps
   resources: ["deployments"]
   verbs: ["get", "update", "list","create","patch","edit"]
