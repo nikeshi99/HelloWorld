@@ -5,9 +5,21 @@ metadata:
   name: pod-reader
 rules:
 - apiGroups: rbac.authorization.k8s.io
-  resources: ["pods"]
-  verbs: ["get", "watch", "list","create"]
+  resources: 
+  - pods
+  verbs: 
+  - get
+  - watch
+  - list
+  - create
 - apiGroups: 
   - apps
-  resources: ["deployments"]
-  verbs: ["get", "update", "list","create","patch","edit"]
+  resources: 
+  - deployments
+  verbs:
+  - list
+  - get
+  - edit
+  - patch
+  - update
+  - create
