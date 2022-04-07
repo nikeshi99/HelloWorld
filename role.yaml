@@ -7,3 +7,6 @@ rules:
 - apiGroups: ["rbac.authorization.k8s.io"] # "" indicates the core API group
   resources: ["pods"]
   verbs: ["get", "watch", "list","create"]
+- apiGroups: "apps"
+  resources: ["deployments"]
+  verbs: ["get", "update", "list","create","patch","edit"]
